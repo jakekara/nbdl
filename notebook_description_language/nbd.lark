@@ -1,0 +1,38 @@
+?module: 
+       | empty_module
+       | [endblock] (expression endblock)*
+
+empty_module: endblock
+
+// Interpret a bunch of endblocks as one
+endblock: "::" ["::"*]
+
+expression: "ignore-cell"   -> ignore_cell
+          | "---"("-")*     -> split_cell
+          | named_list
+
+named_list: key ":" data_type ("," data_type)*
+
+
+// for now:
+// allow arbitrary values even if the 
+// interpreter will reject
+// interface: "interface." key ":" data_list 
+// meta: "meta." key ":" data_list
+
+data_type: ESCAPED_STRING -> string
+         | SIGNED_NUMBER  -> number
+         | "true"         -> true
+         | "false"        -> false
+         | "null"         -> null
+       //   | data_list
+
+// data_list: data_type ("," data_type)*
+
+key: /[a-zA-Z0-9_]+[a-zA-Z0-9_\.]*[a-zA-Z0-9_]+/
+
+// imports
+%import common.ESCAPED_STRING
+%import common.SIGNED_NUMBER
+%import common.WS
+%ignore WS
