@@ -62,3 +62,8 @@ define a task interface that describes the notebook to workflow tools like Make.
 #: interface.in_files: file1.txt, file1.txt ::
 #: interface.out_files: out.csv ::
 ```
+
+## Grammar
+
+The grammar, writen in [Lark](https://github.com/lark-parser/lark) is very readable. The [entire grammar](https://github.com/jakekara/nbdl/blob/main/notebook_description_language/nbd.lark) can (so far)
+be expressed in less than one printed page of code.
