@@ -1,1 +1,1 @@
-notebook_description_language/nbd.lark
+include notebook_description_language/nbd.lark
