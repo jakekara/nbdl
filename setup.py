@@ -8,6 +8,9 @@ setuptools.setup(
     description="A notebook description language parser",
     url="https://github.com/jakekara.com/nbdl",
     packages=setuptools.find_packages(),
+    install_requires=[
+        "lark-parser==0.10.0"
+    ],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
