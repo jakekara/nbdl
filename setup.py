@@ -9,7 +9,8 @@ setuptools.setup(
     url="https://github.com/jakekara.com/nbdl",
     packages=setuptools.find_packages(),
     install_requires=[
-        "lark-parser==0.10.0"
+        "lark-parser==0.10.0",
+        "pyyaml"
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
