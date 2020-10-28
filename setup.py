@@ -19,4 +19,5 @@ setuptools.setup(
     ],
     include_package_data=True,
     python_requires='>=3.6',
+    package_data={'margo_parser': ['margo_parser/margo.lark']},
 )
