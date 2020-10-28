@@ -1,79 +1,91 @@
 from .parser import parse
-import pytest
-
-NC = "NO_CODE"
-SC = "SPLIT_CELL"
-EB = "END_BLOCK"
-IC = "IGNORE_CELL"
 
 
-def NL(name, values):
-    return (name, values)
+def test_empty_source():
+    tokenized = parse("")
+    assert type(tokenized) == dict
+    assert tokenized["TYPE"] == "BLOCK"
+    assert tokenized["SYNTAX"] == "MARGO"
+    assert len(tokenized["BODY"]) == 0
 
 
-def test_parses_empty_block():
-    assert parse("   ") == []
-    assert parse("") == []
-
-
-def test_can_parse_endblock():
-    assert parse("::") == [NC]
-
-
-def test_can_parse_split_cell():
-    assert parse("--- ::") == [SC, EB]
-    assert parse(" --- ::") == [SC, EB]
-
-    assert parse("---------- ::") == [SC, EB]
-
-
-def test_rejects_unterminated_line():
-    with pytest.raises(Exception):
-        parse("---")
-
-
-def test_accepts_many_endblocks():
-    assert parse(":: :: :: :: ::") == [NC]
-    assert parse(":: --- :: :: ::") == [EB, SC, EB]
-    assert parse(":: :: --- :: --- :: ::") == [
-        EB, SC, EB, SC, EB
-    ]
+def test_only_endblocks():
+    tokenized = parse(":: :: :: ::")
+    assert len(tokenized["BODY"]) == 0
 
 
 def test_ignore_cell():
-    assert parse("ignore-cell::") == [IC, EB]
-    assert parse("ignore-cell::ignore-cell ::  ignore-cell::") == [
-        IC, EB, IC, EB, IC, EB
-    ]
+    tokenized = parse("ignore-cell ::")
+    assert len(tokenized["BODY"]) == 1
+    assert tokenized["BODY"][0]["TYPE"] == "BUILTIN"
+    assert tokenized["BODY"][0]["BODY"]["NAME"] == "IGNORE_CELL"
 
 
-def test_named_list_with_numbers():
-    assert parse("meta.value: 100 :: meta.value: 200 ::") == [
-        ("meta.value", [100]),
-        EB,
-        ("meta.value", [200]),
-        EB
-    ]
+def test_basic_declaration():
+    """
+    If no language is specified, a declaration is treated
+    as a JSON array without the enclosing brackets required
+    """
+
+    tokenized = parse(
+        """
+    hello: "world!!", 1, true, 3, false, null, 
+    ::
+    """
+    )
+
+    assert len(tokenized["BODY"]) == 1
+    declaration = tokenized["BODY"][0]
+    assert declaration["TYPE"] == "DECLARATION"
+    assert declaration["NAME"] == "hello"
+    assert declaration["VALUE"] == ["world!!", 1, True, 3, False, None, {"a":"b"}]
 
 
-def test_named_list_with_strings():
-    assert parse("meta_VALUE_1: \"string\" ::") == [
-        ("meta_VALUE_1", ["string"]),
-        EB
-    ]
+def test_json_declaration():
+
+    """
+    Users can assert that a declaration is valid JSON,
+    and it will be parsed (or fail)
+    """
+
+    tokenized = parse(
+        """
+    hello [json]: '["world!!", 
+    1,
+    true, 
+    3, 
+    false, 
+    null]'
+    ::
+    """
+    )
+    declaration = tokenized["BODY"][0]
+    assert declaration["VALUE"] == ["world!!", 1, True, 3, False, None]
 
 
-def test_named_list_with_multiple_values():
-    assert parse(
-        "meta: \"string\", 100, -1200.123, false, null, true::"
-    ) == [
-        ("meta",
-         ["string",
-          100,
-          -1200.123,
-          False,
-          None,
-          True]
-         ),
-        EB
-    ]
+def test_yaml_declaration():
+    tokenized = parse(
+        """
+    hello [yaml]: '
+    - "world!!"
+    - 1
+    - true
+    - 3
+    - false
+    - null'
+    ::
+    """
+    )
+    declaration = tokenized["BODY"][0]
+    assert declaration["VALUE"] == ["world!!", 1, True, 3, False, None]
+
+
+def test_raw_declaration():
+    inner_string = "hello world!! 1 true 3 false null"
+    test_string = f"""
+    hello [raw]: '{inner_string}' ::
+    """
+    tokenized = parse(test_string)
+
+    declaration = tokenized["BODY"][0]
+    assert declaration["VALUE"] == inner_string
