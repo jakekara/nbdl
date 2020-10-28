@@ -1,1 +1,1 @@
-include notebook_description_language/nbd.lark
+margo_parser/margo.lark
