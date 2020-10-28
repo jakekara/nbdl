@@ -1,7 +1,7 @@
 import setuptools
 
 setuptools.setup(
-    name="nbdlang-jakekara", # Replace with your own username
+    name="margo-parser", # Replace with your own username
     version="0.0.1",
     author="Jake Kara",
     author_email="jake@jakekara.com",
