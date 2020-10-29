@@ -6,6 +6,7 @@ def test_empty_source():
     assert type(tokenized) == dict
     assert tokenized["TYPE"] == "BLOCK"
     assert tokenized["SYNTAX"] == "MARGO"
+
     assert len(tokenized["BODY"]) == 0
 
 
