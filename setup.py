@@ -1,5 +1,17 @@
 import setuptools
 
+import os
+
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+
+def read_requirements():
+    """Parse requirements from requirements.txt."""
+    reqs_path = os.path.join('.', 'install-requirements.txt')
+    with open(reqs_path, 'r') as f:
+        requirements = [line.rstrip() for line in f]
+    return requirements
+
 setuptools.setup(
     name="margo-parser", # Replace with your own username
     version="0.0.1",
@@ -8,10 +20,11 @@ setuptools.setup(
     description="A notebook description language parser",
     url="https://github.com/jakekara.com/nbdl",
     packages=setuptools.find_packages(),
-    install_requires=[
-        "lark-parser[regex]==0.10.0",
-        "pyyaml"
-    ],
+    install_requires=read_requirements(),
+    # install_requires=[
+    #     "lark-parser[regex]==0.10.0",
+    #     "pyyaml"
+    # ],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
