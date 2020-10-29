@@ -29,7 +29,6 @@ class MargoTransformer(Transformer):
         }
 
     def declaration(self, c):
-
         assert len(c) == 3
         key = c[0]
         lang = c[1][1:-1].lower().strip()
@@ -115,8 +114,8 @@ class MargoTransformer(Transformer):
 
         return self.declaration([k, "[json]", json.dumps(vals)])  # key
 
-    def key(self, k):
-        return k[0]
+    def KEY(self, k):
+        return str(k)
 
     def false(self, _):
         return False

@@ -29,16 +29,17 @@ def test_basic_declaration():
 
     tokenized = parse(
         """
-    hello: "world!!", 1, true, 3, false, null, 
-    ::
+        hello_basic: "world!!!", 
+        1, 
+        true, 3, false, null, ::
     """
     )
 
     assert len(tokenized["BODY"]) == 1
     declaration = tokenized["BODY"][0]
     assert declaration["TYPE"] == "DECLARATION"
-    assert declaration["NAME"] == "hello"
-    assert declaration["VALUE"] == ["world!!", 1, True, 3, False, None, {"a":"b"}]
+    assert declaration["NAME"] == "hello_basic"
+    assert declaration["VALUE"] == ["world!!!", 1, True, 3, False, None]
 
 
 def test_json_declaration():

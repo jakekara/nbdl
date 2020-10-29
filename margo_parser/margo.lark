@@ -12,7 +12,7 @@ statement:
 LANG: "[" KEY "]"
 declaration: KEY LANG ":" QSTRING
 // If not lang string is provided, assume it's JSON
-basic_declaration: KEY ":" value ("," value)*
+basic_declaration: KEY ":" value ("," value)* (",")*
 
 builtin: IGNORE_CELL
     // | view_statement
