@@ -1,16 +1,27 @@
 from .MargoBlock import MargoBlock
-
+import re
 class MargoCommentPrefixes:
     PYTHON = "# ::"
 
-def get_preamble_source(cell_source: str, prefix=MargoCommentPrefixes.PYTHON) -> str:
+def get_markdown_preamble_source(cell_source: str) -> str: 
+
+    matches = re.match(r'\s*```margo(?P<preamble>[\s\S]+)```', cell_source)
+    if not matches:
+        return ""
+    return matches['preamble']
+
+
+def get_preamble_source(cell_source: str, prefix=MargoCommentPrefixes.PYTHON, cell_type="code") -> str:
     """
     Get the Margo preamble source using the default Python Margo note prefix "# :: "
     """
 
     ret = []
 
-    lines = cell_source.split("\n")
+    if cell_type == "markdown":
+        lines = get_markdown_preamble_source(cell_source).split("\n")
+    else:
+        lines = cell_source.split("\n")
 
     for line in lines:
         trim_line = line.lstrip()
