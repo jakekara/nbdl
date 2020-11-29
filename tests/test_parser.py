@@ -1,4 +1,4 @@
-from .parser import parse
+from margo_parser.parser import parse
 
 
 def test_empty_source():

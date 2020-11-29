@@ -1,5 +1,5 @@
-from .get_preamble_block import get_preamble_block
-from .MargoStatement import MargoStatementTypes
+from margo_parser.api.get_preamble_block import get_preamble_block
+from margo_parser.api.MargoStatement import MargoStatementTypes
 
 def gets_empty_preamble():
 
