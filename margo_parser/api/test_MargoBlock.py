@@ -1,6 +1,8 @@
+from ..exceptions import MargoParseException
+import json
 from .MargoBlock import MargoBlock
 from .MargoStatement import MargoStatement, MargoStatementTypes
-import json
+import pytest
 import yaml 
 
 
@@ -50,3 +52,7 @@ def test_parses_yaml():
     declaration = MargoBlock(margo_source).statements[0]
     assert declaration.name == "yaml-values"
     assert declaration.value == obj
+
+def test_invalid_margo_raises():
+    with pytest.raises(MargoParseException):
+        MargoBlock("# :: Invalid Margo Code ::")

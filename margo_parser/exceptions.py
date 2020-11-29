@@ -1,0 +1,2 @@
+class MargoParseException(Exception):
+    pass

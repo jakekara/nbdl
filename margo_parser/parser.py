@@ -1,5 +1,6 @@
 from lark import Tree, Lark
 from .margo_transformer import MargoTransformer
+from .exceptions import MargoParseException
 import os
 
 
@@ -18,4 +19,8 @@ def transform(tree):
 
 
 def parse(source: str):
-    return transform(get_tree(source))
+    try:
+        return transform(get_tree(source))
+    except Exception as e:
+        raise MargoParseException(e)
+
