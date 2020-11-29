@@ -7,6 +7,7 @@ class MargoStatementTypes:
 
     @staticmethod
     def is_valid_type(statement_type: str) -> bool:
+        """Determine if a string is a valid margo statement type"""
         return statement_type in MargoStatementTypes.VALID_TYPES
 
 
