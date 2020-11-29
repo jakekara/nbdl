@@ -18,8 +18,8 @@ def test_only_endblocks():
 def test_ignore_cell():
     tokenized = parse("ignore-cell ::")
     assert len(tokenized["BODY"]) == 1
-    assert tokenized["BODY"][0]["TYPE"] == "BUILTIN"
-    assert tokenized["BODY"][0]["BODY"]["NAME"] == "IGNORE_CELL"
+    assert tokenized["BODY"][0]["TYPE"] == "DIRECTIVE"
+    assert tokenized["BODY"][0]["NAME"] == "ignore-cell"
 
 
 def test_basic_declaration():

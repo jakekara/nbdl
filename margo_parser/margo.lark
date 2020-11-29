@@ -7,18 +7,15 @@ ENDBLOCK: "::"
 statement: 
     | basic_declaration
     | declaration
-    | builtin
+    | directive
+    // | builtin
 
 LANG: "[" KEY "]"
 declaration: KEY LANG ":" QSTRING
 // If not lang string is provided, assume it's JSON
 basic_declaration: KEY ":" value ("," value)* (",")*
 
-builtin: IGNORE_CELL
-    // | view_statement
-
-IGNORE_CELL: "ignore-cell" 
-view_statement: "view" ":" MODULE_NAME ("," MODULE_NAME)*
+directive: KEY
 
 
 DQUOTE: "\"" 
@@ -29,7 +26,7 @@ SQSTRING: SQUOTE MULTILINE_TEXT SQUOTE
 QSTRING: DQSTRING | SQSTRING
 
 MODULE_NAME: /[a-zA-Z]+[a-zA-Z0-9\_]*/
-KEY: /[a-zA-Z0-9\._]+/
+KEY: /[a-zA-Z0-9\._-]+/
  
 value: 
     | "true" -> true

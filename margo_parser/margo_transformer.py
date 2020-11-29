@@ -28,6 +28,11 @@ class MargoTransformer(Transformer):
             "BODY": unwrapped_statements,
         }
 
+    def directive(self, d):
+        assert len(d) == 1
+        name = str(d[0])
+        return {"TYPE": "DIRECTIVE", "NAME": name}
+
     def declaration(self, c):
         assert len(c) == 3
         key = c[0]
@@ -92,9 +97,9 @@ class MargoTransformer(Transformer):
 
         return {"TYPE": "BUILTIN", "BODY": s[0]}
 
-    def view_statement(self, v):
-        (keys) = v
-        return {"NAME": "view", "VIEW_LIST": v}
+    # def view_statement(self, v):
+    #     (keys) = v
+    #     return {"NAME": "view", "VIEW_LIST": v}
 
     def IGNORE_CELL(self, _):
         return {"NAME": "IGNORE_CELL"}
