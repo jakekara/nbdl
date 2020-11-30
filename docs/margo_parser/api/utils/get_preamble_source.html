@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.9.2" />
-<title>margo_parser.api API documentation</title>
+<title>margo_parser.api.utils.get_preamble_source API documentation</title>
 <meta name="description" content="" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
@@ -19,38 +19,150 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>margo_parser.api</code></h1>
+<h1 class="title">Module <code>margo_parser.api.utils.get_preamble_source</code></h1>
 </header>
 <section id="section-intro">
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">from .classes.MargoBlock import MargoBlock
-from .classes.MargoStatement import MargoStatement, MargoStatementTypes
-from .classes.MargoPythonCellPreambleBlock import MargoPythonCellPreambleBlock
-from .classes.MargoMarkdownCellPrambleBlock import MargoMarkdownPreambleBlock
-from ..exceptions import MargoParseException, MargoLoaderException</code></pre>
+<pre><code class="python">from ..classes.MargoBlock import MargoBlock
+import re
+
+
+class MargoCommentPrefixes:
+    PYTHON = &#34;# ::&#34;
+
+
+def get_markdown_preamble_source(cell_source: str) -&gt; str:
+
+    matches = re.match(r&#34;\s*```margo(?P&lt;preamble&gt;[\s\S]+)```&#34;, cell_source)
+    if not matches:
+        return &#34;&#34;
+    return matches[&#34;preamble&#34;]
+
+
+def get_preamble_source(
+    cell_source: str, prefix=MargoCommentPrefixes.PYTHON, cell_type=&#34;code&#34;
+) -&gt; str:
+    &#34;&#34;&#34;
+    Get the Margo preamble source using the default Python Margo note prefix &#34;# :: &#34;
+    &#34;&#34;&#34;
+
+    ret = []
+
+    if cell_type == &#34;markdown&#34;:
+        lines = get_markdown_preamble_source(cell_source).split(&#34;\n&#34;)
+    else:
+        lines = cell_source.split(&#34;\n&#34;)
+
+    for line in lines:
+        trim_line = line.lstrip()
+        if trim_line.startswith(prefix):
+            ret.append(trim_line.lstrip()[len(prefix) :])
+        elif trim_line.startswith(&#34;#&#34;):
+            # Ignore comments
+            continue
+        elif len(trim_line.strip()) &lt; 1:
+            # Ignore empty lines
+            continue
+        else:
+            # Stop at the first non-comment, non-empty line
+            break
+
+    return &#34;\n&#34;.join(ret)</code></pre>
 </details>
 </section>
 <section>
-<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt><code class="name"><a title="margo_parser.api.classes" href="classes/index.html">margo_parser.api.classes</a></code></dt>
+<dt id="margo_parser.api.utils.get_preamble_source.get_markdown_preamble_source"><code class="name flex">
+<span>def <span class="ident">get_markdown_preamble_source</span></span>(<span>cell_source: str) ‑> str</span>
+</code></dt>
 <dd>
 <div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_markdown_preamble_source(cell_source: str) -&gt; str:
+
+    matches = re.match(r&#34;\s*```margo(?P&lt;preamble&gt;[\s\S]+)```&#34;, cell_source)
+    if not matches:
+        return &#34;&#34;
+    return matches[&#34;preamble&#34;]</code></pre>
+</details>
 </dd>
-<dt><code class="name"><a title="margo_parser.api.utils" href="utils/index.html">margo_parser.api.utils</a></code></dt>
+<dt id="margo_parser.api.utils.get_preamble_source.get_preamble_source"><code class="name flex">
+<span>def <span class="ident">get_preamble_source</span></span>(<span>cell_source: str, prefix='# ::', cell_type='code') ‑> str</span>
+</code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Get the Margo preamble source using the default Python Margo note prefix "# :: "</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_preamble_source(
+    cell_source: str, prefix=MargoCommentPrefixes.PYTHON, cell_type=&#34;code&#34;
+) -&gt; str:
+    &#34;&#34;&#34;
+    Get the Margo preamble source using the default Python Margo note prefix &#34;# :: &#34;
+    &#34;&#34;&#34;
+
+    ret = []
+
+    if cell_type == &#34;markdown&#34;:
+        lines = get_markdown_preamble_source(cell_source).split(&#34;\n&#34;)
+    else:
+        lines = cell_source.split(&#34;\n&#34;)
+
+    for line in lines:
+        trim_line = line.lstrip()
+        if trim_line.startswith(prefix):
+            ret.append(trim_line.lstrip()[len(prefix) :])
+        elif trim_line.startswith(&#34;#&#34;):
+            # Ignore comments
+            continue
+        elif len(trim_line.strip()) &lt; 1:
+            # Ignore empty lines
+            continue
+        else:
+            # Stop at the first non-comment, non-empty line
+            break
+
+    return &#34;\n&#34;.join(ret)</code></pre>
+</details>
 </dd>
 </dl>
 </section>
 <section>
-</section>
-<section>
-</section>
-<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="margo_parser.api.utils.get_preamble_source.MargoCommentPrefixes"><code class="flex name class">
+<span>class <span class="ident">MargoCommentPrefixes</span></span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class MargoCommentPrefixes:
+    PYTHON = &#34;# ::&#34;</code></pre>
+</details>
+<h3>Class variables</h3>
+<dl>
+<dt id="margo_parser.api.utils.get_preamble_source.MargoCommentPrefixes.PYTHON"><code class="name">var <span class="ident">PYTHON</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+</dl>
 </section>
 </article>
 <nav id="sidebar">
@@ -61,13 +173,23 @@ from ..exceptions import MargoParseException, MargoLoaderException</code></pre>
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="margo_parser" href="../index.html">margo_parser</a></code></li>
+<li><code><a title="margo_parser.api.utils" href="index.html">margo_parser.api.utils</a></code></li>
 </ul>
 </li>
-<li><h3><a href="#header-submodules">Sub-modules</a></h3>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="margo_parser.api.utils.get_preamble_source.get_markdown_preamble_source" href="#margo_parser.api.utils.get_preamble_source.get_markdown_preamble_source">get_markdown_preamble_source</a></code></li>
+<li><code><a title="margo_parser.api.utils.get_preamble_source.get_preamble_source" href="#margo_parser.api.utils.get_preamble_source.get_preamble_source">get_preamble_source</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
-<li><code><a title="margo_parser.api.classes" href="classes/index.html">margo_parser.api.classes</a></code></li>
-<li><code><a title="margo_parser.api.utils" href="utils/index.html">margo_parser.api.utils</a></code></li>
+<li>
+<h4><code><a title="margo_parser.api.utils.get_preamble_source.MargoCommentPrefixes" href="#margo_parser.api.utils.get_preamble_source.MargoCommentPrefixes">MargoCommentPrefixes</a></code></h4>
+<ul class="">
+<li><code><a title="margo_parser.api.utils.get_preamble_source.MargoCommentPrefixes.PYTHON" href="#margo_parser.api.utils.get_preamble_source.MargoCommentPrefixes.PYTHON">PYTHON</a></code></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
