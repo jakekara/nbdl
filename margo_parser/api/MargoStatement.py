@@ -1,3 +1,4 @@
+from ..exceptions import MargoLoaderException
 class MargoStatementTypes:
 
     DECLARATION = "DECLARATION"
@@ -17,10 +18,10 @@ class MargoStatement:
 
     def __init__(self, statement_type: str, name: str, value=None):
         if not MargoStatementTypes.is_valid_type(statement_type):
-            raise Exception("INVALID MARGO STATEMENT TYPE: " + statement_type)
+            raise MargoLoaderException("Invalid Margo statement type: " + statement_type)
         self.type = statement_type
         if type(name) != str:
-            raise EXCEPTION("MARGO STATEMENT TYPE MUST BE STRING")
+            raise MargoLoaderException("Margo statement type must be str")
         self.name = name
         # Value can be anything
         self.value = value

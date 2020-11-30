@@ -26,7 +26,8 @@
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">class MargoStatementTypes:
+<pre><code class="python">from ..exceptions import MargoLoaderException
+class MargoStatementTypes:
 
     DECLARATION = &#34;DECLARATION&#34;
     DIRECTIVE = &#34;DIRECTIVE&#34;
@@ -45,10 +46,10 @@ class MargoStatement:
 
     def __init__(self, statement_type: str, name: str, value=None):
         if not MargoStatementTypes.is_valid_type(statement_type):
-            raise Exception(&#34;INVALID MARGO STATEMENT TYPE: &#34; + statement_type)
+            raise MargoLoaderException(&#34;Invalid Margo statement type: &#34; + statement_type)
         self.type = statement_type
         if type(name) != str:
-            raise EXCEPTION(&#34;MARGO STATEMENT TYPE MUST BE STRING&#34;)
+            raise MargoLoaderException(&#34;Margo statement type must be str&#34;)
         self.name = name
         # Value can be anything
         self.value = value</code></pre>
@@ -79,10 +80,10 @@ class MargoStatement:
 
     def __init__(self, statement_type: str, name: str, value=None):
         if not MargoStatementTypes.is_valid_type(statement_type):
-            raise Exception(&#34;INVALID MARGO STATEMENT TYPE: &#34; + statement_type)
+            raise MargoLoaderException(&#34;Invalid Margo statement type: &#34; + statement_type)
         self.type = statement_type
         if type(name) != str:
-            raise EXCEPTION(&#34;MARGO STATEMENT TYPE MUST BE STRING&#34;)
+            raise MargoLoaderException(&#34;Margo statement type must be str&#34;)
         self.name = name
         # Value can be anything
         self.value = value</code></pre>

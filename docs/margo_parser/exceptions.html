@@ -27,6 +27,11 @@
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class MargoParseException(Exception):
+    &#34;&#34;&#34;Parsing source code failed&#34;&#34;&#34;
+    pass
+
+class MargoLoaderException(Exception):
+    &#34;&#34;&#34;Something went wrong within largo-loader&#34;&#34;&#34;
     pass</code></pre>
 </details>
 </section>
@@ -39,17 +44,38 @@
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
+<dt id="margo_parser.exceptions.MargoLoaderException"><code class="flex name class">
+<span>class <span class="ident">MargoLoaderException</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Something went wrong within largo-loader</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class MargoLoaderException(Exception):
+    &#34;&#34;&#34;Something went wrong within largo-loader&#34;&#34;&#34;
+    pass</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.Exception</li>
+<li>builtins.BaseException</li>
+</ul>
+</dd>
 <dt id="margo_parser.exceptions.MargoParseException"><code class="flex name class">
 <span>class <span class="ident">MargoParseException</span></span>
 <span>(</span><span>*args, **kwargs)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Common base class for all non-exit exceptions.</p></div>
+<div class="desc"><p>Parsing source code failed</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class MargoParseException(Exception):
+    &#34;&#34;&#34;Parsing source code failed&#34;&#34;&#34;
     pass</code></pre>
 </details>
 <h3>Ancestors</h3>
@@ -74,6 +100,9 @@
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
+<li>
+<h4><code><a title="margo_parser.exceptions.MargoLoaderException" href="#margo_parser.exceptions.MargoLoaderException">MargoLoaderException</a></code></h4>
+</li>
 <li>
 <h4><code><a title="margo_parser.exceptions.MargoParseException" href="#margo_parser.exceptions.MargoParseException">MargoParseException</a></code></h4>
 </li>
