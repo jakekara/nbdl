@@ -23,4 +23,3 @@ def parse(source: str):
         return transform(get_tree(source))
     except Exception as e:
         raise MargoParseException(e)
-
