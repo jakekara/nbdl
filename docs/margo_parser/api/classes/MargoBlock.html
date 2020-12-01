@@ -26,23 +26,25 @@
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">from ...parser import parse
+<pre><code class="python">from ...tokenizer import tokenize
 from .MargoStatement import MargoStatement
+from typing import List
 
 
 class MargoBlock:
+    &#34;&#34;&#34;A collection of Margo statements.&#34;&#34;&#34;
+
     def __init__(self, source: str):
 
-        &#34;&#34;&#34;A class representing a block of multiple Margo statements.
-        Constructor parses source immediately, raising an exception if parsing
+        &#34;&#34;&#34;Parses source immediately, raising an exception if parsing
         fails.
         :param source: The source code string
         :raises: MargoParseException if the source string cannot be parsed
-        :raises: MargoLoaderException if there&#39;s some other error&#34;&#34;&#34;
+        :raises: MargoLangException if there&#39;s some other error&#34;&#34;&#34;
 
         # This is what raises the MargoParseException if it fails
-        parsed = parse(source)
-        self.statements = []
+        parsed = tokenize(source)
+        self.__statements = []
         # TODO - Test statement for valid structure
         for statement in parsed[&#34;BODY&#34;]:
             statement_type = statement[&#34;TYPE&#34;]
@@ -55,7 +57,12 @@ class MargoBlock:
             else:
                 statement = MargoStatement(statement_type, statement_name)
 
-            self.statements.append(statement)</code></pre>
+            self.__statements.append(statement)
+
+    @property
+    def statements(self) -&gt; List[MargoStatement]:
+        &#34;&#34;&#34;List of Margo statements&#34;&#34;&#34;
+        return self.__statements</code></pre>
 </details>
 </section>
 <section>
@@ -72,29 +79,30 @@ class MargoBlock:
 <span>(</span><span>source: str)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>A class representing a block of multiple Margo statements.
-Constructor parses source immediately, raising an exception if parsing
+<div class="desc"><p>A collection of Margo statements.</p>
+<p>Parses source immediately, raising an exception if parsing
 fails.
 :param source: The source code string
 :raises: MargoParseException if the source string cannot be parsed
-:raises: MargoLoaderException if there's some other error</p></div>
+:raises: MargoLangException if there's some other error</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class MargoBlock:
+    &#34;&#34;&#34;A collection of Margo statements.&#34;&#34;&#34;
+
     def __init__(self, source: str):
 
-        &#34;&#34;&#34;A class representing a block of multiple Margo statements.
-        Constructor parses source immediately, raising an exception if parsing
+        &#34;&#34;&#34;Parses source immediately, raising an exception if parsing
         fails.
         :param source: The source code string
         :raises: MargoParseException if the source string cannot be parsed
-        :raises: MargoLoaderException if there&#39;s some other error&#34;&#34;&#34;
+        :raises: MargoLangException if there&#39;s some other error&#34;&#34;&#34;
 
         # This is what raises the MargoParseException if it fails
-        parsed = parse(source)
-        self.statements = []
+        parsed = tokenize(source)
+        self.__statements = []
         # TODO - Test statement for valid structure
         for statement in parsed[&#34;BODY&#34;]:
             statement_type = statement[&#34;TYPE&#34;]
@@ -107,13 +115,34 @@ fails.
             else:
                 statement = MargoStatement(statement_type, statement_name)
 
-            self.statements.append(statement)</code></pre>
+            self.__statements.append(statement)
+
+    @property
+    def statements(self) -&gt; List[MargoStatement]:
+        &#34;&#34;&#34;List of Margo statements&#34;&#34;&#34;
+        return self.__statements</code></pre>
 </details>
 <h3>Subclasses</h3>
 <ul class="hlist">
 <li><a title="margo_parser.api.classes.MargoMarkdownCellPrambleBlock.MargoMarkdownPreambleBlock" href="MargoMarkdownCellPrambleBlock.html#margo_parser.api.classes.MargoMarkdownCellPrambleBlock.MargoMarkdownPreambleBlock">MargoMarkdownPreambleBlock</a></li>
 <li><a title="margo_parser.api.classes.MargoPythonCellPreambleBlock.MargoPythonCellPreambleBlock" href="MargoPythonCellPreambleBlock.html#margo_parser.api.classes.MargoPythonCellPreambleBlock.MargoPythonCellPreambleBlock">MargoPythonCellPreambleBlock</a></li>
 </ul>
+<h3>Instance variables</h3>
+<dl>
+<dt id="margo_parser.api.classes.MargoBlock.MargoBlock.statements"><code class="name">var <span class="ident">statements</span> : List[<a title="margo_parser.api.classes.MargoStatement.MargoStatement" href="MargoStatement.html#margo_parser.api.classes.MargoStatement.MargoStatement">MargoStatement</a>]</code></dt>
+<dd>
+<div class="desc"><p>List of Margo statements</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def statements(self) -&gt; List[MargoStatement]:
+    &#34;&#34;&#34;List of Margo statements&#34;&#34;&#34;
+    return self.__statements</code></pre>
+</details>
+</dd>
+</dl>
 </dd>
 </dl>
 </section>
@@ -133,6 +162,9 @@ fails.
 <ul>
 <li>
 <h4><code><a title="margo_parser.api.classes.MargoBlock.MargoBlock" href="#margo_parser.api.classes.MargoBlock.MargoBlock">MargoBlock</a></code></h4>
+<ul class="">
+<li><code><a title="margo_parser.api.classes.MargoBlock.MargoBlock.statements" href="#margo_parser.api.classes.MargoBlock.MargoBlock.statements">statements</a></code></li>
+</ul>
 </li>
 </ul>
 </li>

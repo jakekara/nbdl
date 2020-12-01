@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.9.2" />
-<title>margo_parser.api.MargoStatement API documentation</title>
+<title>margo_parser.tokenizer.tokenizer API documentation</title>
 <meta name="description" content="" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
@@ -19,40 +19,38 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>margo_parser.api.MargoStatement</code></h1>
+<h1 class="title">Module <code>margo_parser.tokenizer.tokenizer</code></h1>
 </header>
 <section id="section-intro">
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">from ..exceptions import MargoLoaderException
-class MargoStatementTypes:
-
-    DECLARATION = &#34;DECLARATION&#34;
-    DIRECTIVE = &#34;DIRECTIVE&#34;
-
-    VALID_TYPES = [DECLARATION, DIRECTIVE]
-
-    @staticmethod
-    def is_valid_type(statement_type: str) -&gt; bool:
-        &#34;&#34;&#34;Determine if a string is a valid margo statement type&#34;&#34;&#34;
-        return statement_type in MargoStatementTypes.VALID_TYPES
+<pre><code class="python">from lark import Tree, Lark
+from .margo_transformer import MargoTransformer
+from ..exceptions import MargoParseException
+import os
 
 
-class MargoStatement:
+def grammar():
+    grammar_file_path = os.path.join(os.path.split(__file__)[0], &#34;margo.lark&#34;)
+    grammar_content = open(grammar_file_path).read()
+    return Lark(grammar_content, start=&#34;block&#34;, regex=True)
 
-    TYPES = [MargoStatementTypes.DECLARATION, MargoStatementTypes.DECLARATION]
 
-    def __init__(self, statement_type: str, name: str, value=None):
-        if not MargoStatementTypes.is_valid_type(statement_type):
-            raise MargoLoaderException(&#34;Invalid Margo statement type: &#34; + statement_type)
-        self.type = statement_type
-        if type(name) != str:
-            raise MargoLoaderException(&#34;Margo statement type must be str&#34;)
-        self.name = name
-        # Value can be anything
-        self.value = value</code></pre>
+def get_tree(source: str):
+    return grammar().parse(source)
+
+
+def transform(tree):
+    return MargoTransformer().transform(tree)
+
+
+def tokenize(source: str):
+    try:
+        return transform(get_tree(source))
+    except Exception as e:
+        raise MargoParseException(e)</code></pre>
 </details>
 </section>
 <section>
@@ -60,13 +58,10 @@ class MargoStatement:
 <section>
 </section>
 <section>
-</section>
-<section>
-<h2 class="section-title" id="header-classes">Classes</h2>
+<h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="margo_parser.api.MargoStatement.MargoStatement"><code class="flex name class">
-<span>class <span class="ident">MargoStatement</span></span>
-<span>(</span><span>statement_type: str, name: str, value=None)</span>
+<dt id="margo_parser.tokenizer.tokenizer.get_tree"><code class="name flex">
+<span>def <span class="ident">get_tree</span></span>(<span>source: str)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -74,30 +69,12 @@ class MargoStatement:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">class MargoStatement:
-
-    TYPES = [MargoStatementTypes.DECLARATION, MargoStatementTypes.DECLARATION]
-
-    def __init__(self, statement_type: str, name: str, value=None):
-        if not MargoStatementTypes.is_valid_type(statement_type):
-            raise MargoLoaderException(&#34;Invalid Margo statement type: &#34; + statement_type)
-        self.type = statement_type
-        if type(name) != str:
-            raise MargoLoaderException(&#34;Margo statement type must be str&#34;)
-        self.name = name
-        # Value can be anything
-        self.value = value</code></pre>
+<pre><code class="python">def get_tree(source: str):
+    return grammar().parse(source)</code></pre>
 </details>
-<h3>Class variables</h3>
-<dl>
-<dt id="margo_parser.api.MargoStatement.MargoStatement.TYPES"><code class="name">var <span class="ident">TYPES</span></code></dt>
-<dd>
-<div class="desc"></div>
 </dd>
-</dl>
-</dd>
-<dt id="margo_parser.api.MargoStatement.MargoStatementTypes"><code class="flex name class">
-<span>class <span class="ident">MargoStatementTypes</span></span>
+<dt id="margo_parser.tokenizer.tokenizer.grammar"><code class="name flex">
+<span>def <span class="ident">grammar</span></span>(<span>)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -105,53 +82,44 @@ class MargoStatement:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">class MargoStatementTypes:
-
-    DECLARATION = &#34;DECLARATION&#34;
-    DIRECTIVE = &#34;DIRECTIVE&#34;
-
-    VALID_TYPES = [DECLARATION, DIRECTIVE]
-
-    @staticmethod
-    def is_valid_type(statement_type: str) -&gt; bool:
-        &#34;&#34;&#34;Determine if a string is a valid margo statement type&#34;&#34;&#34;
-        return statement_type in MargoStatementTypes.VALID_TYPES</code></pre>
+<pre><code class="python">def grammar():
+    grammar_file_path = os.path.join(os.path.split(__file__)[0], &#34;margo.lark&#34;)
+    grammar_content = open(grammar_file_path).read()
+    return Lark(grammar_content, start=&#34;block&#34;, regex=True)</code></pre>
 </details>
-<h3>Class variables</h3>
-<dl>
-<dt id="margo_parser.api.MargoStatement.MargoStatementTypes.DECLARATION"><code class="name">var <span class="ident">DECLARATION</span></code></dt>
-<dd>
-<div class="desc"></div>
 </dd>
-<dt id="margo_parser.api.MargoStatement.MargoStatementTypes.DIRECTIVE"><code class="name">var <span class="ident">DIRECTIVE</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="margo_parser.api.MargoStatement.MargoStatementTypes.VALID_TYPES"><code class="name">var <span class="ident">VALID_TYPES</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-</dl>
-<h3>Static methods</h3>
-<dl>
-<dt id="margo_parser.api.MargoStatement.MargoStatementTypes.is_valid_type"><code class="name flex">
-<span>def <span class="ident">is_valid_type</span></span>(<span>statement_type: str) ‑> bool</span>
+<dt id="margo_parser.tokenizer.tokenizer.tokenize"><code class="name flex">
+<span>def <span class="ident">tokenize</span></span>(<span>source: str)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Determine if a string is a valid margo statement type</p></div>
+<div class="desc"></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">@staticmethod
-def is_valid_type(statement_type: str) -&gt; bool:
-    &#34;&#34;&#34;Determine if a string is a valid margo statement type&#34;&#34;&#34;
-    return statement_type in MargoStatementTypes.VALID_TYPES</code></pre>
+<pre><code class="python">def tokenize(source: str):
+    try:
+        return transform(get_tree(source))
+    except Exception as e:
+        raise MargoParseException(e)</code></pre>
+</details>
+</dd>
+<dt id="margo_parser.tokenizer.tokenizer.transform"><code class="name flex">
+<span>def <span class="ident">transform</span></span>(<span>tree)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def transform(tree):
+    return MargoTransformer().transform(tree)</code></pre>
 </details>
 </dd>
 </dl>
-</dd>
-</dl>
+</section>
+<section>
 </section>
 </article>
 <nav id="sidebar">
@@ -162,26 +130,15 @@ def is_valid_type(statement_type: str) -&gt; bool:
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="margo_parser.api" href="index.html">margo_parser.api</a></code></li>
+<li><code><a title="margo_parser.tokenizer" href="index.html">margo_parser.tokenizer</a></code></li>
 </ul>
 </li>
-<li><h3><a href="#header-classes">Classes</a></h3>
-<ul>
-<li>
-<h4><code><a title="margo_parser.api.MargoStatement.MargoStatement" href="#margo_parser.api.MargoStatement.MargoStatement">MargoStatement</a></code></h4>
+<li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
-<li><code><a title="margo_parser.api.MargoStatement.MargoStatement.TYPES" href="#margo_parser.api.MargoStatement.MargoStatement.TYPES">TYPES</a></code></li>
-</ul>
-</li>
-<li>
-<h4><code><a title="margo_parser.api.MargoStatement.MargoStatementTypes" href="#margo_parser.api.MargoStatement.MargoStatementTypes">MargoStatementTypes</a></code></h4>
-<ul class="">
-<li><code><a title="margo_parser.api.MargoStatement.MargoStatementTypes.DECLARATION" href="#margo_parser.api.MargoStatement.MargoStatementTypes.DECLARATION">DECLARATION</a></code></li>
-<li><code><a title="margo_parser.api.MargoStatement.MargoStatementTypes.DIRECTIVE" href="#margo_parser.api.MargoStatement.MargoStatementTypes.DIRECTIVE">DIRECTIVE</a></code></li>
-<li><code><a title="margo_parser.api.MargoStatement.MargoStatementTypes.VALID_TYPES" href="#margo_parser.api.MargoStatement.MargoStatementTypes.VALID_TYPES">VALID_TYPES</a></code></li>
-<li><code><a title="margo_parser.api.MargoStatement.MargoStatementTypes.is_valid_type" href="#margo_parser.api.MargoStatement.MargoStatementTypes.is_valid_type">is_valid_type</a></code></li>
-</ul>
-</li>
+<li><code><a title="margo_parser.tokenizer.tokenizer.get_tree" href="#margo_parser.tokenizer.tokenizer.get_tree">get_tree</a></code></li>
+<li><code><a title="margo_parser.tokenizer.tokenizer.grammar" href="#margo_parser.tokenizer.tokenizer.grammar">grammar</a></code></li>
+<li><code><a title="margo_parser.tokenizer.tokenizer.tokenize" href="#margo_parser.tokenizer.tokenizer.tokenize">tokenize</a></code></li>
+<li><code><a title="margo_parser.tokenizer.tokenizer.transform" href="#margo_parser.tokenizer.tokenizer.transform">transform</a></code></li>
 </ul>
 </li>
 </ul>

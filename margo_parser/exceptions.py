@@ -1,12 +1,10 @@
 class MargoParseException(Exception):
-
     """Parsing source code failed"""
 
     pass
 
 
-class MargoLoaderException(Exception):
-
+class MargoLangException(Exception):
     """Something went wrong within largo-loader"""
 
     pass

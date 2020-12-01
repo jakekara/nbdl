@@ -3,9 +3,13 @@ from ..utils.get_preamble_source import get_markdown_preamble_source
 
 
 class MargoMarkdownPreambleBlock(MargoBlock):
+    """A helper to process just the Margo preamble (if any) of a Markdown
+    cell. Instead of using MargoBlock directly, which requires the source string to
+    only be valid Margo, this will extract the preamble from the cell contents.
+    """
+
     def __init__(self, source: str):
-        """A helper to process just the Margo preamble (if any) of a Markdown
-        cell
+        """
         :param source: The entire source of a Markdown cell
         """
 

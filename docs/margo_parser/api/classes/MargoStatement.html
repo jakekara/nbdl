@@ -26,10 +26,12 @@
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">from ...exceptions import MargoLoaderException
+<pre><code class="python">from ...exceptions import MargoLangException
 
 
 class MargoStatementTypes:
+
+    &#34;&#34;&#34;Supported types of Margo statements&#34;&#34;&#34;
 
     DECLARATION = &#34;DECLARATION&#34;
     DIRECTIVE = &#34;DIRECTIVE&#34;
@@ -44,24 +46,42 @@ class MargoStatementTypes:
 
 class MargoStatement:
 
-    TYPES = [MargoStatementTypes.DECLARATION, MargoStatementTypes.DECLARATION]
+    &#34;&#34;&#34;A convenient abstraction for a tokenized Margo statement&#34;&#34;&#34;
 
     def __init__(self, statement_type: str, name: str, value=None):
 
-        &#34;&#34;&#34;A class representing a Margo statement
-        @raises MargoLoaderException if parameters are invalid
+        &#34;&#34;&#34;
+        :param statement_type: MargoStatementTypes.DECLARATION or MargoStatementTypes.DIRECTIVE
+        :param name: the name of the statement
+        :param value: the value of the statement
+        @raises MargoLangException if parameters are invalid
         &#34;&#34;&#34;
 
         if not MargoStatementTypes.is_valid_type(statement_type):
-            raise MargoLoaderException(
-                &#34;Invalid Margo statement type: &#34; + statement_type
-            )
-        self.type = statement_type
+            raise MargoLangException(&#34;Invalid Margo statement type: &#34; + statement_type)
+        self.__type = statement_type
         if type(name) != str:
-            raise MargoLoaderException(&#34;Margo statement name type must be str&#34;)
-        self.name = name
+            raise MargoLangException(&#34;Margo statement name type must be str&#34;)
+        self.__name = name
         # Value can be anything, so don&#39;t validate
-        self.value = value</code></pre>
+        if self.__type == MargoStatementTypes.DIRECTIVE and value is not None:
+            raise MargoLangException(&#34;Cannot create a directive with value&#34;)
+        self.__value = value
+
+    @property
+    def name(self) -&gt;str :
+        &#34;&#34;&#34;The name of the statement&#34;&#34;&#34; 
+        return self.__name
+     
+    @property
+    def type(self) -&gt; str:
+        &#34;&#34;&#34;&#39;DIRECTIVE&#39; or &#39;DECLARATION&#39;&#34;&#34;&#34;
+        return self.__type
+
+    @property
+    def value(self) -&gt; any:
+        &#34;&#34;&#34;Any value. Should be None for directives&#34;&#34;&#34;
+        return self.__value</code></pre>
 </details>
 </section>
 <section>
@@ -78,38 +98,94 @@ class MargoStatement:
 <span>(</span><span>statement_type: str, name: str, value=None)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>A class representing a Margo statement
-@raises MargoLoaderException if parameters are invalid</p></div>
+<div class="desc"><p>A convenient abstraction for a tokenized Margo statement</p>
+<p>:param statement_type: MargoStatementTypes.DECLARATION or MargoStatementTypes.DIRECTIVE
+:param name: the name of the statement
+:param value: the value of the statement
+@raises MargoLangException if parameters are invalid</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class MargoStatement:
 
-    TYPES = [MargoStatementTypes.DECLARATION, MargoStatementTypes.DECLARATION]
+    &#34;&#34;&#34;A convenient abstraction for a tokenized Margo statement&#34;&#34;&#34;
 
     def __init__(self, statement_type: str, name: str, value=None):
 
-        &#34;&#34;&#34;A class representing a Margo statement
-        @raises MargoLoaderException if parameters are invalid
+        &#34;&#34;&#34;
+        :param statement_type: MargoStatementTypes.DECLARATION or MargoStatementTypes.DIRECTIVE
+        :param name: the name of the statement
+        :param value: the value of the statement
+        @raises MargoLangException if parameters are invalid
         &#34;&#34;&#34;
 
         if not MargoStatementTypes.is_valid_type(statement_type):
-            raise MargoLoaderException(
-                &#34;Invalid Margo statement type: &#34; + statement_type
-            )
-        self.type = statement_type
+            raise MargoLangException(&#34;Invalid Margo statement type: &#34; + statement_type)
+        self.__type = statement_type
         if type(name) != str:
-            raise MargoLoaderException(&#34;Margo statement name type must be str&#34;)
-        self.name = name
+            raise MargoLangException(&#34;Margo statement name type must be str&#34;)
+        self.__name = name
         # Value can be anything, so don&#39;t validate
-        self.value = value</code></pre>
+        if self.__type == MargoStatementTypes.DIRECTIVE and value is not None:
+            raise MargoLangException(&#34;Cannot create a directive with value&#34;)
+        self.__value = value
+
+    @property
+    def name(self) -&gt;str :
+        &#34;&#34;&#34;The name of the statement&#34;&#34;&#34; 
+        return self.__name
+     
+    @property
+    def type(self) -&gt; str:
+        &#34;&#34;&#34;&#39;DIRECTIVE&#39; or &#39;DECLARATION&#39;&#34;&#34;&#34;
+        return self.__type
+
+    @property
+    def value(self) -&gt; any:
+        &#34;&#34;&#34;Any value. Should be None for directives&#34;&#34;&#34;
+        return self.__value</code></pre>
 </details>
-<h3>Class variables</h3>
+<h3>Instance variables</h3>
 <dl>
-<dt id="margo_parser.api.classes.MargoStatement.MargoStatement.TYPES"><code class="name">var <span class="ident">TYPES</span></code></dt>
+<dt id="margo_parser.api.classes.MargoStatement.MargoStatement.name"><code class="name">var <span class="ident">name</span> : str</code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>The name of the statement</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def name(self) -&gt;str :
+    &#34;&#34;&#34;The name of the statement&#34;&#34;&#34; 
+    return self.__name</code></pre>
+</details>
+</dd>
+<dt id="margo_parser.api.classes.MargoStatement.MargoStatement.type"><code class="name">var <span class="ident">type</span> : str</code></dt>
+<dd>
+<div class="desc"><p>'DIRECTIVE' or 'DECLARATION'</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def type(self) -&gt; str:
+    &#34;&#34;&#34;&#39;DIRECTIVE&#39; or &#39;DECLARATION&#39;&#34;&#34;&#34;
+    return self.__type</code></pre>
+</details>
+</dd>
+<dt id="margo_parser.api.classes.MargoStatement.MargoStatement.value"><code class="name">var <span class="ident">value</span> : <built-in function any></code></dt>
+<dd>
+<div class="desc"><p>Any value. Should be None for directives</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def value(self) -&gt; any:
+    &#34;&#34;&#34;Any value. Should be None for directives&#34;&#34;&#34;
+    return self.__value</code></pre>
+</details>
 </dd>
 </dl>
 </dd>
@@ -117,12 +193,14 @@ class MargoStatement:
 <span>class <span class="ident">MargoStatementTypes</span></span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Supported types of Margo statements</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class MargoStatementTypes:
+
+    &#34;&#34;&#34;Supported types of Margo statements&#34;&#34;&#34;
 
     DECLARATION = &#34;DECLARATION&#34;
     DIRECTIVE = &#34;DIRECTIVE&#34;
@@ -187,7 +265,9 @@ def is_valid_type(statement_type: str) -&gt; bool:
 <li>
 <h4><code><a title="margo_parser.api.classes.MargoStatement.MargoStatement" href="#margo_parser.api.classes.MargoStatement.MargoStatement">MargoStatement</a></code></h4>
 <ul class="">
-<li><code><a title="margo_parser.api.classes.MargoStatement.MargoStatement.TYPES" href="#margo_parser.api.classes.MargoStatement.MargoStatement.TYPES">TYPES</a></code></li>
+<li><code><a title="margo_parser.api.classes.MargoStatement.MargoStatement.name" href="#margo_parser.api.classes.MargoStatement.MargoStatement.name">name</a></code></li>
+<li><code><a title="margo_parser.api.classes.MargoStatement.MargoStatement.type" href="#margo_parser.api.classes.MargoStatement.MargoStatement.type">type</a></code></li>
+<li><code><a title="margo_parser.api.classes.MargoStatement.MargoStatement.value" href="#margo_parser.api.classes.MargoStatement.MargoStatement.value">value</a></code></li>
 </ul>
 </li>
 <li>

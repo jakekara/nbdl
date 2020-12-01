@@ -1,8 +1,7 @@
-from margo_parser.parser import parse
-
+from margo_parser.tokenizer.tokenizer import tokenize
 
 def test_empty_source():
-    tokenized = parse("")
+    tokenized = tokenize("")
     assert type(tokenized) == dict
     assert tokenized["TYPE"] == "BLOCK"
     assert tokenized["SYNTAX"] == "MARGO"
@@ -11,12 +10,12 @@ def test_empty_source():
 
 
 def test_only_endblocks():
-    tokenized = parse(":: :: :: ::")
+    tokenized = tokenize(":: :: :: ::")
     assert len(tokenized["BODY"]) == 0
 
 
 def test_ignore_cell():
-    tokenized = parse("ignore-cell ::")
+    tokenized = tokenize("ignore-cell ::")
     assert len(tokenized["BODY"]) == 1
     assert tokenized["BODY"][0]["TYPE"] == "DIRECTIVE"
     assert tokenized["BODY"][0]["NAME"] == "ignore-cell"
@@ -28,7 +27,7 @@ def test_basic_declaration():
     as a JSON array without the enclosing brackets required
     """
 
-    tokenized = parse(
+    tokenized = tokenize(
         """
         hello_basic: "world!!!", 
         1, 
@@ -50,7 +49,7 @@ def test_json_declaration():
     and it will be parsed (or fail)
     """
 
-    tokenized = parse(
+    tokenized = tokenize(
         """
     hello [json]: '["world!!", 
     1,
@@ -66,7 +65,7 @@ def test_json_declaration():
 
 
 def test_yaml_declaration():
-    tokenized = parse(
+    tokenized = tokenize(
         """
     hello [yaml]: '
     - "world!!"
@@ -87,7 +86,7 @@ def test_raw_declaration():
     test_string = f"""
     hello [raw]: '{inner_string}' ::
     """
-    tokenized = parse(test_string)
+    tokenized = tokenize(test_string)
 
     declaration = tokenized["BODY"][0]
     assert declaration["VALUE"] == inner_string

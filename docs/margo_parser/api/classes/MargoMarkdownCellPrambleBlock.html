@@ -31,9 +31,13 @@ from ..utils.get_preamble_source import get_markdown_preamble_source
 
 
 class MargoMarkdownPreambleBlock(MargoBlock):
+    &#34;&#34;&#34;A helper to process just the Margo preamble (if any) of a Markdown
+    cell. Instead of using MargoBlock directly, which requires the source string to
+    only be valid Margo, this will extract the preamble from the cell contents.
+    &#34;&#34;&#34;
+
     def __init__(self, source: str):
-        &#34;&#34;&#34;A helper to process just the Margo preamble (if any) of a Markdown
-        cell
+        &#34;&#34;&#34;
         :param source: The entire source of a Markdown cell
         &#34;&#34;&#34;
 
@@ -56,16 +60,21 @@ class MargoMarkdownPreambleBlock(MargoBlock):
 </code></dt>
 <dd>
 <div class="desc"><p>A helper to process just the Margo preamble (if any) of a Markdown
-cell
-:param source: The entire source of a Markdown cell</p></div>
+cell. Instead of using MargoBlock directly, which requires the source string to
+only be valid Margo, this will extract the preamble from the cell contents.</p>
+<p>:param source: The entire source of a Markdown cell</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class MargoMarkdownPreambleBlock(MargoBlock):
+    &#34;&#34;&#34;A helper to process just the Margo preamble (if any) of a Markdown
+    cell. Instead of using MargoBlock directly, which requires the source string to
+    only be valid Margo, this will extract the preamble from the cell contents.
+    &#34;&#34;&#34;
+
     def __init__(self, source: str):
-        &#34;&#34;&#34;A helper to process just the Margo preamble (if any) of a Markdown
-        cell
+        &#34;&#34;&#34;
         :param source: The entire source of a Markdown cell
         &#34;&#34;&#34;
 
@@ -75,6 +84,14 @@ cell
 <h3>Ancestors</h3>
 <ul class="hlist">
 <li><a title="margo_parser.api.classes.MargoBlock.MargoBlock" href="MargoBlock.html#margo_parser.api.classes.MargoBlock.MargoBlock">MargoBlock</a></li>
+</ul>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="margo_parser.api.classes.MargoBlock.MargoBlock" href="MargoBlock.html#margo_parser.api.classes.MargoBlock.MargoBlock">MargoBlock</a></b></code>:
+<ul class="hlist">
+<li><code><a title="margo_parser.api.classes.MargoBlock.MargoBlock.statements" href="MargoBlock.html#margo_parser.api.classes.MargoBlock.MargoBlock.statements">statements</a></code></li>
+</ul>
+</li>
 </ul>
 </dd>
 </dl>
