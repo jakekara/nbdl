@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>margo_parser.tokenizer package &#8212; margo-parser  documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="margo-parser-tokenizer-package">
+<h1>margo_parser.tokenizer package<a class="headerlink" href="#margo-parser-tokenizer-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-margo_parser.tokenizer.margo_transformer">
+<span id="margo-parser-tokenizer-margo-transformer-module"></span><h2>margo_parser.tokenizer.margo_transformer module<a class="headerlink" href="#module-margo_parser.tokenizer.margo_transformer" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="margo_parser.tokenizer.margo_transformer.MargoTransformer">
+<em class="property">class </em><code class="sig-prename descclassname">margo_parser.tokenizer.margo_transformer.</code><code class="sig-name descname">MargoTransformer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">visit_tokens</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#margo_parser.tokenizer.margo_transformer.MargoTransformer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">lark.visitors.Transformer</span></code></p>
+<dl class="py method">
+<dt id="margo_parser.tokenizer.margo_transformer.MargoTransformer.ENDBLOCK">
+<code class="sig-name descname">ENDBLOCK</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">eb</span></em><span class="sig-paren">)</span><a class="headerlink" href="#margo_parser.tokenizer.margo_transformer.MargoTransformer.ENDBLOCK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="margo_parser.tokenizer.margo_transformer.MargoTransformer.IGNORE_CELL">
+<code class="sig-name descname">IGNORE_CELL</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">_</span></em><span class="sig-paren">)</span><a class="headerlink" href="#margo_parser.tokenizer.margo_transformer.MargoTransformer.IGNORE_CELL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="margo_parser.tokenizer.margo_transformer.MargoTransformer.KEY">
+<code class="sig-name descname">KEY</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">k</span></em><span class="sig-paren">)</span><a class="headerlink" href="#margo_parser.tokenizer.margo_transformer.MargoTransformer.KEY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="margo_parser.tokenizer.margo_transformer.MargoTransformer.QSTRING">
+<code class="sig-name descname">QSTRING</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span></em><span class="sig-paren">)</span><a class="headerlink" href="#margo_parser.tokenizer.margo_transformer.MargoTransformer.QSTRING" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="margo_parser.tokenizer.margo_transformer.MargoTransformer.argument_list">
+<code class="sig-name descname">argument_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">al</span></em><span class="sig-paren">)</span><a class="headerlink" href="#margo_parser.tokenizer.margo_transformer.MargoTransformer.argument_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="margo_parser.tokenizer.margo_transformer.MargoTransformer.basic_declaration">
+<code class="sig-name descname">basic_declaration</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">kvp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#margo_parser.tokenizer.margo_transformer.MargoTransformer.basic_declaration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="margo_parser.tokenizer.margo_transformer.MargoTransformer.block">
+<code class="sig-name descname">block</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">b</span></em><span class="sig-paren">)</span><a class="headerlink" href="#margo_parser.tokenizer.margo_transformer.MargoTransformer.block" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="margo_parser.tokenizer.margo_transformer.MargoTransformer.builtin">
+<code class="sig-name descname">builtin</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span></em><span class="sig-paren">)</span><a class="headerlink" href="#margo_parser.tokenizer.margo_transformer.MargoTransformer.builtin" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="margo_parser.tokenizer.margo_transformer.MargoTransformer.declaration">
+<code class="sig-name descname">declaration</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">c</span></em><span class="sig-paren">)</span><a class="headerlink" href="#margo_parser.tokenizer.margo_transformer.MargoTransformer.declaration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="margo_parser.tokenizer.margo_transformer.MargoTransformer.directive">
+<code class="sig-name descname">directive</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em><span class="sig-paren">)</span><a class="headerlink" href="#margo_parser.tokenizer.margo_transformer.MargoTransformer.directive" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="margo_parser.tokenizer.margo_transformer.MargoTransformer.expression">
+<code class="sig-name descname">expression</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">e</span><span class="p">:</span> <span class="n">lark.tree.Tree</span></em><span class="sig-paren">)</span><a class="headerlink" href="#margo_parser.tokenizer.margo_transformer.MargoTransformer.expression" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="margo_parser.tokenizer.margo_transformer.MargoTransformer.false">
+<code class="sig-name descname">false</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">_</span></em><span class="sig-paren">)</span><a class="headerlink" href="#margo_parser.tokenizer.margo_transformer.MargoTransformer.false" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="margo_parser.tokenizer.margo_transformer.MargoTransformer.function">
+<code class="sig-name descname">function</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em><span class="sig-paren">)</span><a class="headerlink" href="#margo_parser.tokenizer.margo_transformer.MargoTransformer.function" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="margo_parser.tokenizer.margo_transformer.MargoTransformer.function_name">
+<code class="sig-name descname">function_name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fn</span></em><span class="sig-paren">)</span><a class="headerlink" href="#margo_parser.tokenizer.margo_transformer.MargoTransformer.function_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="margo_parser.tokenizer.margo_transformer.MargoTransformer.null">
+<code class="sig-name descname">null</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">_</span></em><span class="sig-paren">)</span><a class="headerlink" href="#margo_parser.tokenizer.margo_transformer.MargoTransformer.null" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="margo_parser.tokenizer.margo_transformer.MargoTransformer.number">
+<code class="sig-name descname">number</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n</span></em><span class="sig-paren">)</span><a class="headerlink" href="#margo_parser.tokenizer.margo_transformer.MargoTransformer.number" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="margo_parser.tokenizer.margo_transformer.MargoTransformer.statement">
+<code class="sig-name descname">statement</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">lark.tree.Tree</span></em><span class="sig-paren">)</span><a class="headerlink" href="#margo_parser.tokenizer.margo_transformer.MargoTransformer.statement" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="margo_parser.tokenizer.margo_transformer.MargoTransformer.string">
+<code class="sig-name descname">string</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span></em><span class="sig-paren">)</span><a class="headerlink" href="#margo_parser.tokenizer.margo_transformer.MargoTransformer.string" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="margo_parser.tokenizer.margo_transformer.MargoTransformer.true">
+<code class="sig-name descname">true</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">_</span></em><span class="sig-paren">)</span><a class="headerlink" href="#margo_parser.tokenizer.margo_transformer.MargoTransformer.true" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="margo_parser.tokenizer.margo_transformer.MargoTransformer.value">
+<code class="sig-name descname">value</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v</span></em><span class="sig-paren">)</span><a class="headerlink" href="#margo_parser.tokenizer.margo_transformer.MargoTransformer.value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-margo_parser.tokenizer.tokenizer">
+<span id="margo-parser-tokenizer-tokenizer-module"></span><h2>margo_parser.tokenizer.tokenizer module<a class="headerlink" href="#module-margo_parser.tokenizer.tokenizer" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="margo_parser.tokenizer.tokenizer.get_tree">
+<code class="sig-prename descclassname">margo_parser.tokenizer.tokenizer.</code><code class="sig-name descname">get_tree</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">source</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#margo_parser.tokenizer.tokenizer.get_tree" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="margo_parser.tokenizer.tokenizer.grammar">
+<code class="sig-prename descclassname">margo_parser.tokenizer.tokenizer.</code><code class="sig-name descname">grammar</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#margo_parser.tokenizer.tokenizer.grammar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="margo_parser.tokenizer.tokenizer.tokenize">
+<code class="sig-prename descclassname">margo_parser.tokenizer.tokenizer.</code><code class="sig-name descname">tokenize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">source</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#margo_parser.tokenizer.tokenizer.tokenize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="margo_parser.tokenizer.tokenizer.transform">
+<code class="sig-prename descclassname">margo_parser.tokenizer.tokenizer.</code><code class="sig-name descname">transform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tree</span></em><span class="sig-paren">)</span><a class="headerlink" href="#margo_parser.tokenizer.tokenizer.transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-margo_parser.tokenizer">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-margo_parser.tokenizer" title="Permalink to this headline">¶</a></h2>
+<p>A tokenizer for Margo syntax</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">margo-parser</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Jake Kara.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/margo_parser.tokenizer.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
