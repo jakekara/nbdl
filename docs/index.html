@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome to margo-parser’s documentation! &#8212; margo-parser  documentation</title>
+    <title>margo-parser API documentation &#8212; margo-parser  documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -31,19 +31,112 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="module-margo_parser.api">
-<span id="welcome-to-margo-parser-s-documentation"></span><h1>Welcome to margo-parser’s documentation!<a class="headerlink" href="#module-margo_parser.api" title="Permalink to this headline">¶</a></h1>
-<p>The API for using margo-parser</p>
+  <div class="section" id="margo-parser-api-documentation">
+<h1>margo-parser API documentation<a class="headerlink" href="#margo-parser-api-documentation" title="Permalink to this headline">¶</a></h1>
+<p>by Jake Kara</p>
+<div class="section" id="margostatement">
+<h2>MargoStatement<a class="headerlink" href="#margostatement" title="Permalink to this headline">¶</a></h2>
+<p>A Margo directive or declaration</p>
+<dl class="py class">
+<dt id="margo_parser.api.MargoStatement">
+<em class="property">class </em><code class="sig-prename descclassname">margo_parser.api.</code><code class="sig-name descname">MargoStatement</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">statement_type</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">value</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#margo_parser.api.MargoStatement" title="Permalink to this definition">¶</a></dt>
+<dd><p>A convenient abstraction for a tokenized Margo statement</p>
+<dl class="py method">
+<dt id="margo_parser.api.MargoStatement.name">
+<em class="property">property </em><code class="sig-name descname">name</code><a class="headerlink" href="#margo_parser.api.MargoStatement.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name of the statement</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="margo_parser.api.MargoStatement.type">
+<em class="property">property </em><code class="sig-name descname">type</code><a class="headerlink" href="#margo_parser.api.MargoStatement.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>‘DIRECTIVE’ or ‘DECLARATION’</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="margo_parser.api.MargoStatement.value">
+<em class="property">property </em><code class="sig-name descname">value</code><a class="headerlink" href="#margo_parser.api.MargoStatement.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Any value. Should be None for directives</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="margo_parser.api.MargoStatementTypes">
+<em class="property">class </em><code class="sig-prename descclassname">margo_parser.api.</code><code class="sig-name descname">MargoStatementTypes</code><a class="headerlink" href="#margo_parser.api.MargoStatementTypes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Supported types of Margo statements</p>
+<dl class="py method">
+<dt id="margo_parser.api.MargoStatementTypes.is_valid_type">
+<em class="property">static </em><code class="sig-name descname">is_valid_type</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">statement_type</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#margo_parser.api.MargoStatementTypes.is_valid_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if a string is a valid margo statement type</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="margoblock">
+<h2>MargoBlock<a class="headerlink" href="#margoblock" title="Permalink to this headline">¶</a></h2>
+<p>A collection of statements</p>
+<dl class="py class">
+<dt id="margo_parser.api.MargoBlock">
+<em class="property">class </em><code class="sig-prename descclassname">margo_parser.api.</code><code class="sig-name descname">MargoBlock</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">source</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#margo_parser.api.MargoBlock" title="Permalink to this definition">¶</a></dt>
+<dd><p>A collection of Margo statements.</p>
+<dl class="py method">
+<dt id="margo_parser.api.MargoBlock.statements">
+<em class="property">property </em><code class="sig-name descname">statements</code><a class="headerlink" href="#margo_parser.api.MargoBlock.statements" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of Margo statements</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="margomarkdownpreambleblock">
+<h2>MargoMarkdownPreambleBlock<a class="headerlink" href="#margomarkdownpreambleblock" title="Permalink to this headline">¶</a></h2>
+<p>MargoBlock generated from the contents of a Markdown cell</p>
+<dl class="py class">
+<dt id="margo_parser.api.MargoMarkdownPreambleBlock">
+<em class="property">class </em><code class="sig-prename descclassname">margo_parser.api.</code><code class="sig-name descname">MargoMarkdownPreambleBlock</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">source</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#margo_parser.api.MargoMarkdownPreambleBlock" title="Permalink to this definition">¶</a></dt>
+<dd><p>A helper to process just the Margo preamble (if any) of a Markdown
+cell. Instead of using MargoBlock directly, which requires the source string to
+only be valid Margo, this will extract the preamble from the cell contents.</p>
+<dl class="py method">
+<dt id="margo_parser.api.MargoMarkdownPreambleBlock.statements">
+<em class="property">property </em><code class="sig-name descname">statements</code><a class="headerlink" href="#margo_parser.api.MargoMarkdownPreambleBlock.statements" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of Margo statements</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="margopythoncellpreambleblock">
+<h2>MargoPythonCellPreambleBlock<a class="headerlink" href="#margopythoncellpreambleblock" title="Permalink to this headline">¶</a></h2>
+<p>MargoBlock generated from the contents of a Python cell</p>
+<dl class="py class">
+<dt id="margo_parser.api.MargoPythonCellPreambleBlock">
+<em class="property">class </em><code class="sig-prename descclassname">margo_parser.api.</code><code class="sig-name descname">MargoPythonCellPreambleBlock</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">source</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#margo_parser.api.MargoPythonCellPreambleBlock" title="Permalink to this definition">¶</a></dt>
+<dd><p>A helper to process just the Margo preamble (if any) of a Python cell.
+Instead of using MargoBlock directly, which requires the source string to
+only be valid Margo, this will extract the preamble from the cell contents.</p>
+<dl class="py method">
+<dt id="margo_parser.api.MargoPythonCellPreambleBlock.statements">
+<em class="property">property </em><code class="sig-name descname">statements</code><a class="headerlink" href="#margo_parser.api.MargoPythonCellPreambleBlock.statements" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of Margo statements</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="exceptions">
+<h2>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="margo_parser.api.MargoParseException">
+<em class="property">class </em><code class="sig-prename descclassname">margo_parser.api.</code><code class="sig-name descname">MargoParseException</code><a class="headerlink" href="#margo_parser.api.MargoParseException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parsing source code failed</p>
+</dd></dl>
+
 <div class="toctree-wrapper compound">
 </div>
 </div>
-<div class="section" id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
-<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
-<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
-</ul>
 </div>
 
 

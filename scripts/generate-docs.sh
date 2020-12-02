@@ -2,6 +2,7 @@
 
 # pdoc --html margo_parser -o docs --force
 sphinx-apidoc-3.8 -o sphinx/source/ margo_parser && \
+rm -rf docs && \
 cd sphinx && \
 make clean && \
 make html && \
