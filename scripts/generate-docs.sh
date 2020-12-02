@@ -7,4 +7,5 @@ cd sphinx && \
 make clean && \
 make html && \
 mv build/html ../docs && \
-cd ..
+cd .. &&
+touch docs/.nojekyll
