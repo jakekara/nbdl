@@ -2,7 +2,7 @@ from .MargoBlock import MargoBlock
 from ..utils.get_preamble_source import get_markdown_preamble_source
 
 
-class MargoMarkdownPreambleBlock(MargoBlock):
+class MargoMarkdownCellPreambleBlock(MargoBlock):
     """A helper to process just the Margo preamble (if any) of a Markdown
     cell. Instead of using MargoBlock directly, which requires the source string to
     only be valid Margo, this will extract the preamble from the cell contents.

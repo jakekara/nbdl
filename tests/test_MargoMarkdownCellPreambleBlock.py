@@ -1,4 +1,4 @@
-from margo_parser.api import MargoMarkdownPreambleBlock
+from margo_parser.api import MargoMarkdownCellPreambleBlock
 
 def test_parses_preamble():
     source = """
@@ -15,7 +15,7 @@ def test_parses_preamble():
     Note that in the margo preamble we don't need the `# ::` prefix
     """
 
-    block = MargoMarkdownPreambleBlock(source)
+    block = MargoMarkdownCellPreambleBlock(source)
 
     assert len(block.statements) == 2
     assert block.statements[0].type == "DIRECTIVE"
