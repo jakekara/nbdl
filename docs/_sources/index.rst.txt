@@ -27,7 +27,7 @@ MargoMarkdownPreambleBlock
 
 MargoBlock generated from the contents of a Markdown cell
 
-.. autoclass:: margo_parser.api.MargoMarkdownPreambleBlock
+.. autoclass:: margo_parser.api.MargoMarkdownCellPreambleBlock
     :inherited-members:
 
 MargoPythonCellPreambleBlock
