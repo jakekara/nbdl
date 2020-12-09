@@ -14,7 +14,7 @@ def read_requirements():
 
 setuptools.setup(
     name="margo-parser", 
-    version="0.0.2-alpha",
+    version="0.0.2a0",
     author="Jake Kara",
     author_email="jake@jakekara.com",
     description="A notebook description language parser",
