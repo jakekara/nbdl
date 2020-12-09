@@ -1,7 +1,6 @@
 from margo_parser.exceptions import MargoParseException
 import json
-from margo_parser.api.MargoBlock import MargoBlock
-from margo_parser.api.MargoStatement import MargoStatement, MargoStatementTypes
+from margo_parser.api import MargoBlock, MargoStatement, MargoStatementTypes
 import pytest
 import yaml 
 
