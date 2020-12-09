@@ -13,8 +13,8 @@ def read_requirements():
     return requirements
 
 setuptools.setup(
-    name="margo-parser", # Replace with your own username
-    version="0.0.1",
+    name="margo-parser", 
+    version="0.0.2-alpha",
     author="Jake Kara",
     author_email="jake@jakekara.com",
     description="A notebook description language parser",
