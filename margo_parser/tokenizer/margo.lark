@@ -1,23 +1,23 @@
 block: (statement ENDBLOCK)*
 
-// statement: expression ENDBLOCK
-
-ENDBLOCK: "::" 
-
 statement: 
-    | basic_declaration
-    | declaration
+    | mvf_assignment
+    | evf_assignment
     | directive
-    // | builtin
 
-LANG: "[" KEY "]"
-declaration: KEY LANG ":" QSTRING
-// If not lang string is provided, assume it's JSON
-basic_declaration: KEY ":" value ("," value)* (",")*
+evf_assignment: KEY "[" KEY "]" ":" QSTRING
+mvf_assignment: KEY ":" value ("," value)* (",")*
 
 directive: KEY
 
+value: 
+    | "true" -> true
+    | "false" -> false
+    | "null" -> null
+    | SIGNED_NUMBER -> number
+    | QSTRING 
 
+ENDBLOCK: "::" 
 DQUOTE: "\"" 
 SQUOTE: "'"
 MULTILINE_TEXT: /.+?/s 
@@ -28,13 +28,6 @@ QSTRING: DQSTRING | SQSTRING
 MODULE_NAME: /[a-zA-Z]+[a-zA-Z0-9\_]*/
 KEY: /[a-zA-Z0-9\._-]+/
  
-value: 
-    | "true" -> true
-    | "false" -> false
-    | "null" -> null
-    | SIGNED_NUMBER -> number
-    | QSTRING 
-
 
 %import common.WS
 %import common.SIGNED_NUMBER

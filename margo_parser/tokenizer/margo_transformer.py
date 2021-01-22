@@ -33,10 +33,10 @@ class MargoTransformer(Transformer):
         name = str(d[0])
         return {"TYPE": "DIRECTIVE", "NAME": name}
 
-    def declaration(self, c):
+    def evf_assignment(self, c):
         assert len(c) == 3
         key = c[0]
-        lang = c[1][1:-1].lower().strip()
+        lang = c[1].lower().strip()
         body = c[2]
         parsed = False
         value = None
@@ -112,12 +112,13 @@ class MargoTransformer(Transformer):
 
     def argument_list(self, al):
         (s, *vals) = al
+        
         return vals
 
-    def basic_declaration(self, kvp):
+    def mvf_assignment(self, kvp):
         (k, *vals) = kvp
 
-        return self.declaration([k, "[json]", json.dumps(vals)])  # key
+        return self.evf_assignment([k, "json", json.dumps(vals)])  # key
 
     def KEY(self, k):
         return str(k)
