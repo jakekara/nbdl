@@ -1,0 +1,26 @@
+block ::= (statement endblock)*
+
+endblock ::= "::"
+
+statement ::= declaration
+            | assignment
+
+declaration ::= keyword
+
+assignment ::= mvf_assignment
+             | edf_assignment
+
+mvf_assignment ::= keyword ":" mvf_value
+mvf_value ::= scalar ("," scalar)*
+
+evf_assignment ::= keyword "[" evf_identifier "]" : <string>
+
+evf_identifier ::= keyword
+
+keyword ::= [a-zA-Z0-9\._-]+
+
+scalar ::= "true" 
+         | "false" 
+         | "null" 
+         | <number>
+         | <string>

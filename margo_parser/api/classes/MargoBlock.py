@@ -1,5 +1,7 @@
 from ...tokenizer import tokenize
 from .MargoStatement import MargoStatement
+from .MargoAssignment import MargoAssignment
+from .MargoDirective import MargoDirective
 from typing import List
 
 
@@ -23,11 +25,12 @@ class MargoBlock:
             statement_name = statement["NAME"]
             if "VALUE" in statement:
                 statement_value = statement["VALUE"]
-                statement = MargoStatement(
-                    statement_type, statement_name, value=statement_value
+                statement = MargoAssignment(
+                    statement_name,
+                    statement_value
                 )
             else:
-                statement = MargoStatement(statement_type, statement_name)
+                statement = MargoDirective(statement_name)
 
             self.__statements.append(statement)
 
