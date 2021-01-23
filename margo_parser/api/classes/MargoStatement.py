@@ -1,5 +1,5 @@
 from ...exceptions import MargoLangException
-
+from abc import ABC
 
 class MargoStatementTypes:
 
@@ -16,9 +16,9 @@ class MargoStatementTypes:
         return statement_type in MargoStatementTypes.VALID_TYPES
 
 
-class MargoStatement:
+class MargoStatement(ABC):
 
-    """A convenient abstraction for a tokenized Margo statement"""
+    """A Margo statement"""
 
     def __init__(self, statement_type: str, name: str, value=None):
 
@@ -41,7 +41,7 @@ class MargoStatement:
         self.__value = value
 
     @property
-    def name(self) ->str :
+    def name(self) -> str :
         """The name of the statement""" 
         return self.__name
      

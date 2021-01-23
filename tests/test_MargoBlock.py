@@ -1,6 +1,6 @@
 from margo_parser.exceptions import MargoParseException
 import json
-from margo_parser.api import MargoBlock, MargoStatement, MargoStatementTypes
+from margo_parser.api import MargoBlock, MargoDirective, MargoAssignment, MargoStatement, MargoStatementTypes
 import pytest
 import yaml 
 
@@ -13,10 +13,11 @@ def test_parses_empty_margo_block():
 def test_parses_ignore_cell():
     block = MargoBlock("ignore-cell ::")
     assert len(block.statements) == 1
-    assert type(block.statements[0]) == MargoStatement
+    assert type(block.statements[0]) == MargoDirective
     assert block.statements[0].value == None
     assert block.statements[0].name == "ignore-cell"
     assert block.statements[0].type == MargoStatementTypes.DIRECTIVE
+    assert isinstance(block.statements[0], MargoDirective)
 
 def test_parses_arbitrary_directives():
     block = MargoBlock("example-code ::")
@@ -40,6 +41,7 @@ def test_parses_json():
     declaration = MargoBlock(margo_source).statements[0]
     assert declaration.name == "json-values"
     assert declaration.value == obj
+    assert isinstance(declaration, MargoAssignment)
 
 def test_parses_yaml():
     obj = {"inputs": ["1", 2, True, False, None]}
