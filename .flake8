@@ -1,0 +1,5 @@
+[flake8]
+ignore =
+    # E203 whitespace before ':' ...
+    # This is not PEP8 compliant
+    E203,

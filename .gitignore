@@ -2,3 +2,5 @@ venv
 design
 .scratch
 margo_parser.egg-info
+.tox
+dist

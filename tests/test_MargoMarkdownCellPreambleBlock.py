@@ -1,5 +1,6 @@
 from margo_parser.api import MargoMarkdownCellPreambleBlock
 
+
 def test_parses_preamble():
     source = """
 
@@ -7,7 +8,7 @@ def test_parses_preamble():
     ignore-cell ::
     do-something ::
     ```
-    
+
     # Hello, world
 
     This cell is a description of the Hello, world program....

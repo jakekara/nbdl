@@ -1,11 +1,5 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
-# pdoc --html margo_parser -o docs --force
-sphinx-apidoc-3.8 -o sphinx/source/ margo_parser && \
-rm -rf docs && \
-cd sphinx && \
-make clean && \
-make html && \
-mv build/html ../docs && \
-cd .. &&
-touch docs/.nojekyll
+pdoc --html src/margo_parser -o docs/apidocs/html --force
+
+pdoc src/margo_parser -o docs/apidocs/markdown --force
