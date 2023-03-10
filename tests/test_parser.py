@@ -1,5 +1,6 @@
 from margo_parser.tokenizer.tokenizer import tokenize
 
+
 def test_empty_source():
     tokenized = tokenize("")
     assert type(tokenized) == dict
@@ -29,8 +30,8 @@ def test_basic_declaration():
 
     tokenized = tokenize(
         """
-        hello_basic: "world!!!", 
-        1, 
+        hello_basic: "world!!!",
+        1,
         true, 3, false, null, ::
     """
     )
@@ -43,7 +44,6 @@ def test_basic_declaration():
 
 
 def test_json_declaration():
-
     """
     Users can assert that a declaration is valid JSON,
     and it will be parsed (or fail)
@@ -51,11 +51,11 @@ def test_json_declaration():
 
     tokenized = tokenize(
         """
-    hello [json]: '["world!!", 
+    hello [json]: '["world!!",
     1,
-    true, 
-    3, 
-    false, 
+    true,
+    3,
+    false,
     null]'
     ::
     """

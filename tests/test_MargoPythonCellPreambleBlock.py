@@ -1,5 +1,6 @@
 from margo_parser.api import MargoPythonCellPreambleBlock
 
+
 def test_parses_preamble():
     cell_source = """
     # :: ignore-cell ::
